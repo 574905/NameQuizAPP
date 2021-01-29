@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
     void prepareMenu() {
         addMenuItem("Quiz", QuizActivity.class);
         addMenuItem("Database", DatabaseActivity.class);
-        addMenuItem("Add new person", AddOrDeleteActivity.class);
+        addMenuItem("Add new person", AddActivity.class);
     }
 
     @Override

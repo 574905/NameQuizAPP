@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NameQuizAPP">
         <activity android:name=".QuizActivity"></activity>
-        <activity android:name=".AddOrDeleteActivity" />
+        <activity android:name=".AddActivity" />
         <activity android:name=".DatabaseActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -20,5 +20,7 @@
             </intent-filter>
         </activity>
     </application>
+    <uses-feature android:name="android.hardware.camera"
+        android:required="true" />
 
 </manifest>
