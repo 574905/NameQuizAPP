@@ -27,6 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_marginRight="60dp"
+        android:onClick="deletePerson"
         app:srcCompat="@android:drawable/ic_menu_delete" />
 
 

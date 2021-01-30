@@ -1,19 +1,21 @@
 package com.example.namequizapp;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import com.example.namequizapp.Person;
+import com.example.namequizapp.Database;
 import java.util.HashMap;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
     protected Map<String, Object> actions = new HashMap<>();
+
 
     void prepareMenu() {
         addMenuItem("Quiz", QuizActivity.class);
@@ -25,6 +27,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        ((Database) this.getApplication()).addPerson(new Person("Bendik", getDrawable(R.drawable.bendik)));
+        ((Database) this.getApplication()).addPerson(new Person("Morten", getDrawable(R.drawable.morten)));
+        ((Database) this.getApplication()).addPerson(new Person("Thomas", getDrawable(R.drawable.thomas)));
 
         prepareMenu();
         String[] keys = actions.keySet().toArray(new String[actions.keySet().size()]);

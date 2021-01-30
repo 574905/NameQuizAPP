@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -29,47 +31,39 @@ import java.util.Map;
 
 public class DatabaseActivity extends AppCompatActivity {
 
-    HashMap<Person, Integer> peopleMap = new HashMap<>();
-    Person p1 = new Person("Bendik");
-    Person p2 = new Person("Morten");
-    Person p3 = new Person("Thomas");
 
 
-    String [] names  = new String[3];
+    // declaring the variables
+    String [] names = new String[3];
     int [] images = new int[3];
-
-    void prepareMenu() {
-        addDatabaseItem(p1, R.drawable.bendik);
-        addDatabaseItem(p2, R.drawable.morten);
-        addDatabaseItem(p3, R.drawable.thomas);
-    }
+    ImageButton deleteButton;
+    ListView simpleListView;
+    ArrayList<HashMap<String, String>> peopleList = new ArrayList<>();
+    ArrayList<Person> database;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_database);
-        prepareMenu();
+        deleteButton = (ImageButton) findViewById(R.id.button_delete);
+        database = ((Database) this.getApplication()).getDatabase();
+        int hei = getResources().getIdentifier("thomas", "drawable", getPackageName());
 
 
-        // A simplified for-loop which goes through the HashMap
+        // a simplified for-loop which goes through the ArrayList
         // makes two new arrays containing all the names and images separately
         int i = 0;
-        for (Map.Entry<Person, Integer> entry : peopleMap.entrySet()) {
+        for (Person p : database) {
 
-            Person key = entry.getKey();
-
-            Log.d("name", key.name);
-            Log.d("image", entry.getValue().toString());
-
-            names[i] = key.name;
-            images[i] = entry.getValue();
+            names[i] = p.getName();
+            images[i] = getResources().getIdentifier(p.getName().toLowerCase(), "drawable", getPackageName());
             i++;
 
         }
 
-        // Making a list containing the HashMap of the two arrays
-        ArrayList<HashMap<String, String>> peopleList = new ArrayList<>();
+        // making a list containing the HashMap of the two arrays
+
         for (int index = 0; index < names.length; index++) {
             HashMap<String, String> hashMap = new HashMap<>();
             hashMap.put("name", names[index]);
@@ -78,44 +72,24 @@ public class DatabaseActivity extends AppCompatActivity {
 
         }
 
-        // Making two new arrays, so that the SimpleAdapter can find the right elements
+        // making two new arrays, so that the SimpleAdapter can find the right elements
         String[] from = {"name", "image"}; //string array
         int[] to = {R.id.textView, R.id.imageView}; //int array of views id's
 
-        // Finding the ListView in question
-        ListView simpleListView = (ListView) findViewById(R.id.simpleListView);
+        // finding the ListView in question
+        simpleListView = (ListView) findViewById(R.id.simpleListView);
 
-        //Create object and set the parameters for simpleAdapter
+        // create object and set the parameters for simpleAdapter
         SimpleAdapter simpleAdapter = new SimpleAdapter(this, peopleList, R.layout.list_view_items, from, to);
 
-        //Sets the adapter for listView
+        // sets the adapter for listView
         simpleListView.setAdapter(simpleAdapter);
-        ImageButton deleteButton = (ImageButton) findViewById(R.id.button_delete);
-
-        //Need to make a listener when the button is clicked and a person should be deleted
-
-
 
 
 
     }
 
 
-    public void addDatabaseItem(Person p, int i) {
-        peopleMap.put(p, i);
-    }
-
-    public void deletePerson(Person p) {
-
-        String name = p.getName();
-        for (Map.Entry<Person, Integer> entry : peopleMap.entrySet()) {
-            Person key = entry.getKey();
-            if(name.equals(key.name)){
-                peopleMap.remove(key);
-                peopleMap.remove(entry.getValue());
-            }
-        }
-    }
 
 
     }
