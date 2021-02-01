@@ -2,6 +2,7 @@ package com.example.namequizapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         ((Database) this.getApplication()).addPerson(new Person("Morten", getDrawable(R.drawable.morten)));
         ((Database) this.getApplication()).addPerson(new Person("Thomas", getDrawable(R.drawable.thomas)));
 
+
         prepareMenu();
         String[] keys = actions.keySet().toArray(new String[actions.keySet().size()]);
 
@@ -39,13 +41,23 @@ public class MainActivity extends AppCompatActivity {
         ListAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, keys);
 
         av.setAdapter(adapter);
+
+
         av.setOnItemClickListener((parent, view, position, id) -> {
             String key = (String) parent.getItemAtPosition(position);
             startActivity((Intent) actions.get(key));
         });
+
+
+
+
     }
+
 
     public void addMenuItem(String label, Class<?> cls) {
         actions.put(label, new Intent(this, cls));
     }
+
+
+
 }

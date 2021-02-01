@@ -6,7 +6,7 @@
     android:background="#fff">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/person_image"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:padding="5dp"
@@ -15,7 +15,7 @@
         android:src="@drawable/ic_launcher_background" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/person_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Demo"

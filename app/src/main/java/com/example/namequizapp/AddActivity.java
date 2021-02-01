@@ -18,6 +18,8 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.BitSet;
 
@@ -28,6 +30,7 @@ public class AddActivity extends AppCompatActivity {
     Button galleryPicture;
     ImageView picture;
     Uri imageUri;
+    TextView name;
 
     private static final int IMAGE_PICK_CODE = 1000;
     private static final int PERMISSION_CODE = 1001;
@@ -42,9 +45,25 @@ public class AddActivity extends AppCompatActivity {
 
         // finding the button and imageview from xml
         takePicture = (Button) findViewById(R.id.button_take);
-        picture = (ImageView) findViewById(R.id.image_picture);
         galleryPicture = (Button) findViewById(R.id.button_excisting);
+        picture = (ImageView) findViewById(R.id.image_picture);
+        name = (TextView) findViewById(R.id.nameText);
 
+
+    }
+
+    public void addingThePerson(View view){
+        if(picture==null){
+            Toast.makeText(this, "Picture is null, try again!", Toast.LENGTH_SHORT).show();
+        } else if(name==null) {
+            Toast.makeText(this, "Name is null, try again!", Toast.LENGTH_SHORT).show();
+        } else {
+            Person p = new Person(name.getText().toString(), picture.getDrawable());
+            ((Database) this.getApplication()).addPerson(p);
+            Intent i = new Intent(this, DatabaseActivity.class);
+            i.putExtra("added", "Added!");
+            startActivity(i);
+        }
 
     }
 
