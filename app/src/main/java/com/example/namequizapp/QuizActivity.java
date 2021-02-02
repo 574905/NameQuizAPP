@@ -82,9 +82,13 @@ public class QuizActivity extends MenuActivity {
             qPicture.setImageDrawable(person.getDrawable());
             qName.setText("");
         } else { // No more students
+
             title.setText("Final result");
             qPicture.setImageDrawable(done);
             qName.setText("");
+            qName.setHint("");
+            qName.clearFocus();
+            qName.setBackgroundResource(android.R.color.transparent);
             submit.setText("End quiz");
             submit.setOnClickListener(v -> endQuiz());
             qName.onEditorAction(EditorInfo.IME_ACTION_DONE);
