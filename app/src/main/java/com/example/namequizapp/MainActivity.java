@@ -2,11 +2,15 @@ package com.example.namequizapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.namequizapp.Person;
 import com.example.namequizapp.Database;
@@ -29,9 +33,22 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ((Database) this.getApplication()).addPerson(new Person("Bendik", getDrawable(R.drawable.bendik)));
-        ((Database) this.getApplication()).addPerson(new Person("Morten", getDrawable(R.drawable.morten)));
-        ((Database) this.getApplication()).addPerson(new Person("Thomas", getDrawable(R.drawable.thomas)));
+        Person p1 = new Person("Bendik", getDrawable(R.drawable.bendik));
+        Person p2 = new Person("Morten", getDrawable(R.drawable.morten));
+        Person p3 = new Person("Thomas", getDrawable(R.drawable.thomas));
+
+        if(!((Database) this.getApplication()).existsAlready(p1)){
+            ((Database) this.getApplication()).addPerson(p1);
+        }
+
+        if(!((Database) this.getApplication()).existsAlready(p2)){
+            ((Database) this.getApplication()).addPerson(p2);
+        }
+
+        if(!((Database) this.getApplication()).existsAlready(p3)){
+            ((Database) this.getApplication()).addPerson(p3);
+        }
+
 
 
         prepareMenu();
@@ -57,7 +74,6 @@ public class MainActivity extends AppCompatActivity {
     public void addMenuItem(String label, Class<?> cls) {
         actions.put(label, new Intent(this, cls));
     }
-
 
 
 }

@@ -23,7 +23,7 @@ import android.widget.Toast;
 
 import java.util.BitSet;
 
-public class AddActivity extends AppCompatActivity {
+public class AddActivity extends MenuActivity {
 
     // declaring the variables
     Button takePicture;

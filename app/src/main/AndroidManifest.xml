@@ -2,6 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.namequizapp">
 
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:name=".Database"
         android:allowBackup="true"
@@ -10,7 +16,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.NameQuizAPP">
-        <activity android:name=".QuizActivity"></activity>
+        <activity android:name=".MenuActivity"></activity>
+        <activity android:name=".QuizActivity" />
         <activity android:name=".AddActivity" />
         <activity android:name=".DatabaseActivity" />
         <activity android:name=".MainActivity">
@@ -21,8 +28,5 @@
             </intent-filter>
         </activity>
     </application>
-    <uses-feature android:name="android.hardware.camera"
-        android:required="true" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
 </manifest>

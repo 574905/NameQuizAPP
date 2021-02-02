@@ -3,6 +3,7 @@ package com.example.namequizapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -18,7 +19,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.Random;
 
-public class QuizActivity extends AppCompatActivity {
+public class QuizActivity extends MenuActivity {
 
     ImageView qPicture;
     TextView qName;
@@ -30,6 +31,7 @@ public class QuizActivity extends AppCompatActivity {
     Person person;
     Iterator<Person> it;
     TextView title;
+    Drawable done;
 
 
     @Override
@@ -45,6 +47,8 @@ public class QuizActivity extends AppCompatActivity {
         title = (TextView) findViewById(R.id.quiz_title);
         score = 0;
         total = 0;
+        done = getResources().getDrawable(getResources()
+                .getIdentifier("done", "drawable", getPackageName()));
 
 
         Collections.shuffle(database);
@@ -66,7 +70,7 @@ public class QuizActivity extends AppCompatActivity {
             Toast.makeText(this, "Incorrect, correct answer was " + answer + ".", Toast.LENGTH_LONG).show();
         }
 
-        number.setText("Score: " + score + ""); // Update score
+        number.setText("Score: " + score + "/"+ total); // Update score
         qName.onEditorAction(EditorInfo.IME_ACTION_DONE); // Hide keyboard
         newStudent();
     }
@@ -79,7 +83,7 @@ public class QuizActivity extends AppCompatActivity {
             qName.setText("");
         } else { // No more students
             title.setText("Final result");
-            qPicture.setImageDrawable(null);
+            qPicture.setImageDrawable(done);
             qName.setText("");
             submit.setText("End quiz");
             submit.setOnClickListener(v -> endQuiz());

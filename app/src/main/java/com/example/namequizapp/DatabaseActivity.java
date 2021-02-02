@@ -12,7 +12,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class DatabaseActivity extends AppCompatActivity {
+public class DatabaseActivity extends MenuActivity {
 
 
 

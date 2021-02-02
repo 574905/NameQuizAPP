@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 public class Database extends Application {
     private ArrayList<Person> database = new ArrayList<>();
-    private int score = 0;
 
     public ArrayList<Person> getDatabase() {
         return database;
@@ -16,14 +15,21 @@ public class Database extends Application {
         this.database = database;
     }
 
-    public int getScore() {
-        return score;
-    }
-
     public void addPerson(Person p) {
         this.database.add(p);
     }
 
+    public boolean existsAlready(Person p) {
+        boolean outcome = false;
+
+            for (Person person : database) {
+                if (person.getName().equals(p.getName())) {
+                    outcome = true;
+                }
+            }
 
 
-}
+
+    return outcome;
+    }
+    }
