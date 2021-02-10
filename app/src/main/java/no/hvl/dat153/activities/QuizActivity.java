@@ -1,12 +1,7 @@
-package com.example.namequizapp;
-
-import androidx.appcompat.app.AppCompatActivity;
+package no.hvl.dat153.activities;
 
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
@@ -14,16 +9,21 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
+import com.example.namequizapp.R;
+
 import java.util.Collections;
 import java.util.Iterator;
-import java.util.Random;
+import java.util.List;
+
+import no.hvl.dat153.classes.Person;
+import no.hvl.dat153.classes.PersonDatabase;
+
 
 public class QuizActivity extends MenuActivity {
 
     ImageView qPicture;
     TextView qName;
-    ArrayList<Person> database;
+    List<Person> database;
     Button submit;
     TextView number;
     int score;
@@ -31,7 +31,8 @@ public class QuizActivity extends MenuActivity {
     Person person;
     Iterator<Person> it;
     TextView title;
-    Drawable done;
+    PersonDatabase db;
+
 
 
     @Override
@@ -39,22 +40,26 @@ public class QuizActivity extends MenuActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
 
-        database = ((Database) this.getApplication()).getDatabase();
-        qPicture = (ImageView) findViewById(R.id.quiz_image);
-        qName = (TextView) findViewById(R.id.quiz_name);
-        submit = (Button) findViewById(R.id.button_submit);
-        number = (TextView) findViewById(R.id.score);
-        title = (TextView) findViewById(R.id.quiz_title);
+        // declaring the variables
+        db = PersonDatabase.getInstance(this);
+        database = db.personDao().getAllPersons();
+        qPicture = findViewById(R.id.quiz_image);
+        qName = findViewById(R.id.quiz_name);
+        submit = findViewById(R.id.button_submit);
+        number = findViewById(R.id.score);
+        title = findViewById(R.id.quiz_title);
+
+        // keep track on the score and total persons you have guessed in the quiz
         score = 0;
         total = 0;
-        done = getResources().getDrawable(getResources()
-                .getIdentifier("done", "drawable", getPackageName()));
 
-
+        // shuffles the list and making it in random order
         Collections.shuffle(database);
+
+        // making an Iterator to go through the list
         it = database.iterator();
 
-
+        // to see if there's any students left in the quiz, if not end the quiz
         newStudent();
     }
 
@@ -79,12 +84,11 @@ public class QuizActivity extends MenuActivity {
     public void newStudent() {
         if (it.hasNext()) { // If there are more students in the list
             person = it.next();
-            qPicture.setImageDrawable(person.getDrawable());
+            qPicture.setImageDrawable(person.getImage());
             qName.setText("");
         } else { // No more students
 
             title.setText("Final result");
-            qPicture.setImageDrawable(done);
             qName.setText("");
             qName.setHint("");
             qName.clearFocus();

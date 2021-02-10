@@ -1,17 +1,9 @@
-package com.example.namequizapp;
-
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
+package no.hvl.dat153.activities;
 
 import android.Manifest;
 import android.content.Intent;
-import android.content.IntentSender;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.Picture;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -21,19 +13,27 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.BitSet;
+import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
+import com.example.namequizapp.R;
+
+import no.hvl.dat153.classes.Person;
+import no.hvl.dat153.classes.PersonDatabase;
 
 public class AddActivity extends MenuActivity {
 
-    // declaring the variables
+
     Button takePicture;
     Button galleryPicture;
     ImageView picture;
-    Uri imageUri;
     TextView name;
+    PersonDatabase db;
 
     private static final int IMAGE_PICK_CODE = 1000;
     private static final int PERMISSION_CODE = 1001;
+
 
 
 
@@ -43,7 +43,8 @@ public class AddActivity extends MenuActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
 
-        // finding the button and imageview from xml
+        // declaring the variables
+        db = PersonDatabase.getInstance(this);
         takePicture = (Button) findViewById(R.id.button_take);
         galleryPicture = (Button) findViewById(R.id.button_excisting);
         picture = (ImageView) findViewById(R.id.image_picture);
@@ -52,6 +53,7 @@ public class AddActivity extends MenuActivity {
 
     }
 
+
     public void addingThePerson(View view){
         if(picture==null){
             Toast.makeText(this, "Picture is null, try again!", Toast.LENGTH_SHORT).show();
@@ -59,9 +61,8 @@ public class AddActivity extends MenuActivity {
             Toast.makeText(this, "Name is null, try again!", Toast.LENGTH_SHORT).show();
         } else {
             Person p = new Person(name.getText().toString(), picture.getDrawable());
-            ((Database) this.getApplication()).addPerson(p);
+            db.personDao().insertPerson(p);
             Intent i = new Intent(this, DatabaseActivity.class);
-            i.putExtra("added", "Added!");
             startActivity(i);
         }
 

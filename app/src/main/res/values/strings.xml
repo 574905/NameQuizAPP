@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">NameQuizAPP</string>
+    <string name="add">Add new person</string>
 </resources>
