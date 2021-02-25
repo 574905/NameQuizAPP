@@ -35,9 +35,6 @@ public class AddActivity extends MenuActivity {
     private static final int PERMISSION_CODE = 1001;
 
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

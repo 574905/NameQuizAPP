@@ -8,7 +8,6 @@ import android.widget.ListView;
 
 import com.example.namequizapp.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import no.hvl.dat153.adapters.DatabaseAdapter;
@@ -47,7 +46,7 @@ public class DatabaseActivity extends MenuActivity {
 
         // create adapter on database view layout
         DatabaseAdapter databaseAdapter =
-                new DatabaseAdapter(this, R.layout.list_view_items, database == null ? new ArrayList<>() : database);
+                new DatabaseAdapter(this, R.layout.list_view_items, database /*== null ? new ArrayList<>() : database*/);
 
         // set adapter to the listview
         simpleListView.setAdapter(databaseAdapter);
@@ -57,7 +56,5 @@ public class DatabaseActivity extends MenuActivity {
     }
 
 
-
-
-    }
+}
 

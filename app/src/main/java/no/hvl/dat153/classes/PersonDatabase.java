@@ -9,7 +9,7 @@ import androidx.room.TypeConverters;
 
 import no.hvl.dat153.dao.PersonDAO;
 
-@Database(entities = {Person.class}, version = 2)
+@Database(entities = {Person.class}, version = 4)
 @TypeConverters({Converter.class})
 
 
