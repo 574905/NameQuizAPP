@@ -1,4 +1,18 @@
 <resources>
     <string name="app_name">NameQuizAPP</string>
+
+    <string name="quiz_main">Quiz</string>
+    <string name="db_main">Database</string>
     <string name="add">Add new person</string>
+
+    <string name="takePicture">Take picture</string>
+    <string name="localPicture">Locale picture</string>
+
+    <string name="quizQuestion">This is?</string>
+    <string name="quizSubmitButton">Submit</string>
+
+    <string name="menuHome">Home</string>
+    <string name="menuQuiz">Quiz</string>
+    <string name="menuDatabase">Database</string>
+    <string name="menuAddPerson">Add person</string>
 </resources>
