@@ -42,10 +42,10 @@ public class AddActivity extends MenuActivity {
 
         // declaring the variables
         db = PersonDatabase.getInstance(this);
-        takePicture = (Button) findViewById(R.id.button_take);
-        galleryPicture = (Button) findViewById(R.id.button_excisting);
-        picture = (ImageView) findViewById(R.id.image_picture);
-        name = (TextView) findViewById(R.id.nameText);
+        takePicture = findViewById(R.id.button_take);
+        galleryPicture = findViewById(R.id.button_excisting);
+        picture = findViewById(R.id.image_picture);
+        name = findViewById(R.id.nameText);
 
 
     }
@@ -59,6 +59,7 @@ public class AddActivity extends MenuActivity {
         } else {
             Person p = new Person(name.getText().toString(), picture.getDrawable());
             db.personDao().insertPerson(p);
+            finish();
             Intent i = new Intent(this, DatabaseActivity.class);
             startActivity(i);
         }

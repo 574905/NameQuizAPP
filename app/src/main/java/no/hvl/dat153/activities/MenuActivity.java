@@ -24,26 +24,31 @@ public class MenuActivity extends AppCompatActivity {
         Intent i;
         switch (item.getItemId()){
             case R.id.menu_home:
+                finish();
                 i = new Intent(this, MainActivity.class);
                 startActivity(i);
                 return true;
 
             case R.id.menu_quiz:
+                finish();
                 i = new Intent(this, QuizActivity.class);
                 startActivity(i);
                 return true;
 
             case R.id.menu_database:
+                finish();
                 i = new Intent(this, DatabaseActivity.class);
                 startActivity(i);
                 return true;
 
             case R.id.menu_add:
+                finish();
                 i = new Intent(this, AddActivity.class);
                 startActivity(i);
                 return true;
 
             default:
+                finish();
                 return super.onOptionsItemSelected(item);
         }
 

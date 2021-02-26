@@ -2,7 +2,6 @@ package no.hvl.dat153.classes;
 
 import android.graphics.drawable.Drawable;
 
-import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -15,32 +14,29 @@ public class Person {
     @PrimaryKey(autoGenerate = true)
     private int id;
 
-
+    // variables
     private String name;
     private Drawable image;
 
-
+     // constructor
     public Person(String name, Drawable image){
         this.name = name;
         this.image = image;
     }
 
-
+    // getters
     public String getName() {
         return name;
     }
-
     public Drawable getImage() {
         return image;
     }
-
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    // setters
+    public void setId(int id) { this.id = id; }
 
     @Override
     public String toString() {

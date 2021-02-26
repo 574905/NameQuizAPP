@@ -10,9 +10,15 @@
 
     <string name="quizQuestion">This is?</string>
     <string name="quizSubmitButton">Submit</string>
+    <string name="finalResult">Final result</string>
+    <string name="endQuiz">End quiz</string>
+    <string name="scoreQuiz">Score: </string>
+
 
     <string name="menuHome">Home</string>
     <string name="menuQuiz">Quiz</string>
     <string name="menuDatabase">Database</string>
     <string name="menuAddPerson">Add person</string>
+
+
 </resources>

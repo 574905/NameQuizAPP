@@ -30,6 +30,7 @@ public class TestButton {
     public void testDatabaseButton(){
         onView(withId(R.id.db_button1)).perform(ViewActions.click());
         onView(withId(R.id.button_add)).check(matches(withSubstring("Add new person")));
+        
 
     }
 

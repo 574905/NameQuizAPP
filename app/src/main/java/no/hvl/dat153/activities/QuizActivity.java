@@ -22,8 +22,6 @@ import no.hvl.dat153.classes.PersonDatabase;
 public class QuizActivity extends MenuActivity {
 
     ImageView qPicture;
-    TextView qName;
-    List<Person> database;
     Button submit;
     TextView number;
     int score;
@@ -32,6 +30,9 @@ public class QuizActivity extends MenuActivity {
     Iterator<Person> it;
     TextView title;
     PersonDatabase db;
+
+    public TextView qName;
+    public List<Person> shuffledDatabase;
 
 
 
@@ -42,7 +43,7 @@ public class QuizActivity extends MenuActivity {
 
         // declaring the variables
         db = PersonDatabase.getInstance(this);
-        database = db.personDao().getAllPersons();
+        shuffledDatabase = db.personDao().getAllPersons();
         qPicture = findViewById(R.id.quiz_image);
         qName = findViewById(R.id.quiz_name);
         submit = findViewById(R.id.button_submit);
@@ -53,11 +54,13 @@ public class QuizActivity extends MenuActivity {
         score = 0;
         total = 0;
 
+
+
         // shuffles the list and making it in random order
-        Collections.shuffle(database);
+        Collections.shuffle(shuffledDatabase);
 
         // making an Iterator to go through the list
-        it = database.iterator();
+        it = shuffledDatabase.iterator();
 
         // to see if there's any students left in the quiz, if not end the quiz
         newStudent();
@@ -88,12 +91,13 @@ public class QuizActivity extends MenuActivity {
             qName.setText("");
         } else { // No more students
 
-            title.setText("Final result");
+            title.setText(R.string.finalResult);
             qName.setText("");
             qName.setHint("");
             qName.clearFocus();
             qName.setBackgroundResource(android.R.color.transparent);
-            submit.setText("End quiz");
+            submit.setText(R.string.endQuiz);
+            qPicture.setVisibility(View.INVISIBLE);
             submit.setOnClickListener(v -> endQuiz());
             qName.onEditorAction(EditorInfo.IME_ACTION_DONE);
         }
